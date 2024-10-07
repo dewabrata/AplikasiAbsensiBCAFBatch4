@@ -1,6 +1,7 @@
 package com.juaracoding.aplikasiabsensi
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -8,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +31,16 @@ class Login : AppCompatActivity() {
         val txtPassword = findViewById<EditText>(R.id.editTextTextPassword)
         imageLogo = findViewById<ImageView>(R.id.logoImage)
 
+        val lblBcaFinance = findViewById<TextView>(R.id.lblBcaFinance)
+
+        lblBcaFinance.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://bcafinance.co.id"))
+            startActivity(intent)
+        }
+
         btnLogin = findViewById(R.id.btnLogin)
+
+
 
 
         btnLogin.setOnClickListener {
