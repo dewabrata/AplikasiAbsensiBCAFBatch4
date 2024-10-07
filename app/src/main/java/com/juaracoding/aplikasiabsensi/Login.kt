@@ -1,5 +1,6 @@
 package com.juaracoding.aplikasiabsensi
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -37,6 +38,9 @@ class Login : AppCompatActivity() {
                         "${txtPassword.text}", Toast.LENGTH_LONG
             ).show()
             rotateLogo(imageLogo)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("username", txtUsername.text.toString())
+            startActivity(intent)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
