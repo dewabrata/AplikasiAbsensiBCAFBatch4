@@ -6,13 +6,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.juaracoding.aplikasiabsensi.adapter.AbsensiAdapter
 import com.juaracoding.aplikasiabsensi.model.Absensi
 
 class MenuAbsensi : AppCompatActivity() {
 
     lateinit var fbAdd: FloatingActionButton
     private val absensiList = mutableListOf<Absensi>()
+    lateinit var recyclerView: RecyclerView
+    lateinit var adapter: AbsensiAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +30,9 @@ class MenuAbsensi : AppCompatActivity() {
             insets
         }
 
+        recyclerView = findViewById(R.id.lstAbsensi)
+        setupRecyclerView()
+
         fbAdd = findViewById(R.id.fabAbsen)
 
         fbAdd.setOnClickListener{
@@ -35,6 +43,12 @@ class MenuAbsensi : AppCompatActivity() {
         }
     }
 
+    fun setupRecyclerView(){
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = AbsensiAdapter(absensiList)
+        recyclerView.adapter = adapter
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==100 && resultCode== 101){
@@ -43,6 +57,7 @@ class MenuAbsensi : AppCompatActivity() {
 
             if(absensi != null){
                 absensiList.add(absensi)
+                adapter.notifyItemInserted(absensiList.size-1)
             }
 
 
