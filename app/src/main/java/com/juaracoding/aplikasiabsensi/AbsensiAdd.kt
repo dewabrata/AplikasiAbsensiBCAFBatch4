@@ -115,7 +115,9 @@ class AbsensiAdd : AppCompatActivity() {
             )
 
 
+            setResult(101, Intent().putExtra("absensi", absensi))
 
+            finish()
 
 
 
