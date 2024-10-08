@@ -1,7 +1,10 @@
 package com.juaracoding.aplikasiabsensi
 
 import android.app.TimePickerDialog
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.os.IResultReceiver._Parcel
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -54,7 +57,6 @@ class AbsensiAdd : AppCompatActivity() {
         imgSelfie = findViewById<ImageView>(R.id.imgSelfie)
         btnCapture = findViewById<Button>(R.id.btnCamera)
         btnSubmit = findViewById<Button>(R.id.btnSubmit)
-
         btnTanggal = findViewById<Button>(R.id.btnTanggal)
 
         ArrayAdapter.createFromResource(this,R.array.shift_kerja, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
@@ -80,6 +82,12 @@ class AbsensiAdd : AppCompatActivity() {
             timeDialog.show()
         }
 
+        btnCapture.setOnClickListener{
+            val implicitIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            //startActivity(implicitIntent)
+            startActivityForResult(implicitIntent,88)
+        }
+
         btnSubmit.setOnClickListener {
             var nama = txtNamaAbsen.text
             var lokasi = txtLokasi.text
@@ -102,6 +110,16 @@ class AbsensiAdd : AppCompatActivity() {
         }
 
 
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode==88){
+
+            imgSelfie.setImageBitmap(data?.extras?.get("data") as Bitmap)
+        }
 
     }
 
