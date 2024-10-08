@@ -3,6 +3,7 @@ package com.juaracoding.aplikasiabsensi
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.os.IResultReceiver._Parcel
@@ -32,6 +33,7 @@ class AbsensiAdd : AppCompatActivity() {
     lateinit var btnCapture: Button
     lateinit var btnSubmit: Button
     lateinit var btnTanggal: Button
+    lateinit var bmpSelfie : Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -98,13 +100,22 @@ class AbsensiAdd : AppCompatActivity() {
 
             var txtTanggal = txtTanggalAbsen.text
 
-            val result =  "${nama} ${lokasi} ${jenisAbsen} ${txtTanggal}" +
-                    "${resources.getStringArray(R.array.shift_kerja).get(lstListKerja.selectedItemPosition)}"
+//            val result =  "${nama} ${lokasi} ${jenisAbsen} ${txtTanggal}" +
+//                    "${resources.getStringArray(R.array.shift_kerja).get(lstListKerja.selectedItemPosition)}"
+//            Toast.makeText(this, result, Toast.LENGTH_LONG).show()
+
+            val absensi = Absensi(
+                nama.toString(),
+                lokasi.toString(),
+                jenisAbsen.toString(),
+                txtTanggal.toString(),
+                resources.getStringArray(R.array.shift_kerja).get(lstListKerja.selectedItemPosition)
+                    .toString(),
+                foto = bmpSelfie,
+            )
 
 
 
-
-            Toast.makeText(this, result, Toast.LENGTH_LONG).show()
 
 
 
@@ -119,6 +130,7 @@ class AbsensiAdd : AppCompatActivity() {
 
         if(requestCode==88){
 
+            bmpSelfie = data?.extras?.get("data") as Bitmap
             imgSelfie.setImageBitmap(data?.extras?.get("data") as Bitmap)
         }
 
