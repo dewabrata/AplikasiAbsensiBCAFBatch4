@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AbsensiAdd">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama :" />
+
+            <EditText
+                android:id="@+id/txtNamaAbsen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lokasi :" />
+
+            <EditText
+                android:id="@+id/txtLokasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Alamat" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jenis Absensi :" />
+
+            <RadioGroup
+                android:id="@+id/rgJenisAbsen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:verticalScrollbarPosition="right">
+
+                <RadioButton
+                    android:id="@+id/rbWFO"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="WFO" />
+
+                <RadioButton
+                    android:id="@+id/rbWFH"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="WFH" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jam / Tanggal Absen :" />
+
+            <EditText
+                android:id="@+id/txtTglAbsen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Tanggal" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shift Kerja :" />
+
+            <Spinner
+                android:id="@+id/lstShiftKerja"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:dropDownWidth="wrap_content"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Foto Selfie :" />
+
+            <ImageView
+                android:id="@+id/imgSelfie"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/account_avatar_profile_user_11_svgrepo_com" />
+
+            <Button
+                android:id="@+id/btnCamera"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Take Selfie" />
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Submit Absen" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
