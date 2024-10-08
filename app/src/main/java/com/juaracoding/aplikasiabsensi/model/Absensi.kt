@@ -1,4 +1,4 @@
-package com.juaracoding.aplikasiabsensi
+package com.juaracoding.aplikasiabsensi.model
 
 import android.graphics.Bitmap
 import android.os.Parcelable
