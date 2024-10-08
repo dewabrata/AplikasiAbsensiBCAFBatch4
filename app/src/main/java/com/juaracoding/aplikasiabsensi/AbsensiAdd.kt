@@ -98,7 +98,8 @@ class AbsensiAdd : AppCompatActivity() {
 
             var txtTanggal = txtTanggalAbsen.text
 
-            val result = "Nama ${nama}} lokasi ${lokasi} jenis absen ${jenisAbsen}"
+            val result =  "${nama} ${lokasi} ${jenisAbsen} ${txtTanggal}" +
+                    "${resources.getStringArray(R.array.shift_kerja).get(lstListKerja.selectedItemPosition)}"
 
 
 
