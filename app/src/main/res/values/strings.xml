@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AplikasiAbsensi</string>
+
+    <string-array name="shift_kerja">
+        <item>Shift Pagi</item>
+        <item>Shift Siang</item>
+        <item>Shift Malam</item>
+
+    </string-array>
 </resources>
