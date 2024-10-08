@@ -25,6 +25,14 @@ class MainActivity : AppCompatActivity() {
             //startActivity(implicitIntent)
             startActivityForResult(implicitIntent,99)
         }
+
+        val btnMenuAbsensi = findViewById<androidx.cardview.widget.CardView>(R.id.btnMenuAbsensi)
+
+        btnMenuAbsensi.setOnClickListener{
+            val intent = Intent(this, MenuAbsensi::class.java)
+            intent.putExtra("username", username)
+            startActivity(intent)
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rbWFO)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

@@ -24,6 +24,9 @@ class MenuAbsensi : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_menu_absensi)
+        val username = intent.getStringExtra("username")
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rbWFO)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -38,6 +41,7 @@ class MenuAbsensi : AppCompatActivity() {
         fbAdd.setOnClickListener{
 
             val intent = Intent(this, AbsensiAdd::class.java)
+            intent.putExtra("username", username)
             startActivityForResult(intent,100)
 
         }

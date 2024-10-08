@@ -33,11 +33,16 @@ class AbsensiAdd : AppCompatActivity() {
     lateinit var btnTanggal: Button
     lateinit var bmpSelfie : Bitmap
 
+    lateinit var  username:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_absensi_add)
+        username = intent.getStringExtra("username").toString()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rbWFO)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -58,6 +63,8 @@ class AbsensiAdd : AppCompatActivity() {
         btnCapture = findViewById<Button>(R.id.btnCamera)
         btnSubmit = findViewById<Button>(R.id.btnSubmit)
         btnTanggal = findViewById<Button>(R.id.btnTanggal)
+
+        txtNamaAbsen.setText( username)
 
         ArrayAdapter.createFromResource(this,R.array.shift_kerja, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
             .also { adapter ->
