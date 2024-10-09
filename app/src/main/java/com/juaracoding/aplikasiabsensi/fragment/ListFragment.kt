@@ -1,5 +1,6 @@
 package com.juaracoding.aplikasiabsensi.fragment
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,6 +26,9 @@ class ListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var sharedPreferences: SharedPreferences
+    val PREF_NAME = "Notes"
+    lateinit var  isiNotes : MutableList<Notes>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +45,29 @@ class ListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         val listNotes:RecyclerView = view.findViewById<RecyclerView>(R.id.lstNotes)
+        sharedPreferences = requireActivity().getSharedPreferences(PREF_NAME,0)
+        loadSharedPreferences()
 
-        val dataDummy = mutableListOf<Notes>()
+//        val dataDummy = mutableListOf<Notes>()
+//        dataDummy.add(Notes("Catatan Si Boy", "Ini catatannya"))
         listNotes.layoutManager = LinearLayoutManager(requireContext())
-        dataDummy.add(Notes("Catatan Si Boy", "Ini catatannya"))
-        listNotes.adapter = NotesAdapter(dataDummy)
+
+        listNotes.adapter = NotesAdapter(isiNotes)
 
 
         return view
+    }
+
+    fun loadSharedPreferences(){
+        val allNotes = sharedPreferences.all
+        isiNotes = mutableListOf<Notes>()
+
+        for((key,value) in allNotes){
+            val notes = Notes(key,value.toString())
+            isiNotes.add(notes)
+
+
+        }
     }
 
     companion object {
