@@ -1,5 +1,6 @@
 package com.juaracoding.aplikasiabsensi
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentActivity
 import com.juaracoding.aplikasiabsensi.fragment.ListFragment
+import com.juaracoding.aplikasiabsensi.fragment.NotesFragment
 
 class NotesApp : FragmentActivity() {
 
@@ -20,7 +22,14 @@ class NotesApp : FragmentActivity() {
             insets
         }
 
-        supportFragmentManager.beginTransaction().add(R.id.frameListNotes, ListFragment()).commit()
+        if(resources.configuration.orientation==Configuration.ORIENTATION_PORTRAIT) {
+            supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, ListFragment())
+                .commit()
+        }else{
+            supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, NotesFragment())
+                .commit()
+
+        }
 
     }
 }
