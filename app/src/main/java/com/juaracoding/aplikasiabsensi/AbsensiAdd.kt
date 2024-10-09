@@ -2,6 +2,7 @@ package com.juaracoding.aplikasiabsensi
 
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
@@ -35,6 +36,11 @@ class AbsensiAdd : AppCompatActivity() {
 
     lateinit var  username:String
 
+
+    private val PREF_NAME = "LOGIN"
+    private val USER_IS_LOGIN = "username"
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -42,7 +48,10 @@ class AbsensiAdd : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_absensi_add)
-        username = intent.getStringExtra("username").toString()
+//        username = intent.getStringExtra("username").toString()
+        sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE)
+        username = sharedPreferences.getString(USER_IS_LOGIN,"").toString()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rbWFO)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

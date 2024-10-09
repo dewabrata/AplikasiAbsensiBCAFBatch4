@@ -20,6 +20,8 @@ class MenuAbsensi : AppCompatActivity() {
     lateinit var adapter: AbsensiAdapter
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

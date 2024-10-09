@@ -1,6 +1,7 @@
 package com.juaracoding.aplikasiabsensi
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.animation.AnimationUtils
@@ -18,16 +19,25 @@ class Login : AppCompatActivity() {
 
     private lateinit var btnLogin: Button
     private lateinit var imageLogo: ImageView
+    private val PREF_NAME = "LOGIN"
+    private val USER_IS_LOGIN = "username"
+    private lateinit var sharedPreferences: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+        sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE)
+
 
         val txtUsername = findViewById<EditText>(R.id.txtUsername)
         val txtPassword = findViewById<EditText>(R.id.editTextTextPassword)
         imageLogo = findViewById<ImageView>(R.id.logoImage)
+
+        if(sharedPreferences.contains(USER_IS_LOGIN)){
+            txtUsername.setText(sharedPreferences.getString(USER_IS_LOGIN,""))
+        }
 
         val lblBcaFinance = findViewById<TextView>(R.id.lblBcaFinance)
 
@@ -46,14 +56,24 @@ class Login : AppCompatActivity() {
 
 
         btnLogin.setOnClickListener {
-            Toast.makeText(
-                this, "Username : ${txtUsername.text} Password : " +
-                        "${txtPassword.text}", Toast.LENGTH_LONG
-            ).show()
-            rotateLogo(imageLogo)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("username", txtUsername.text.toString())
-            startActivity(intent)
+            if (txtUsername.text.toString() != "") {
+
+                val editor = sharedPreferences.edit()
+                editor.putString(USER_IS_LOGIN, txtUsername.text.toString())
+                editor.apply()
+
+
+                Toast.makeText(
+                    this, "Username : ${txtUsername.text} Password : " +
+                            "${txtPassword.text}", Toast.LENGTH_LONG
+                ).show()
+                rotateLogo(imageLogo)
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("username", txtUsername.text.toString())
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "Username Tidak Boleh Kosong", Toast.LENGTH_LONG).show()
+            }
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rbWFO)) { v, insets ->

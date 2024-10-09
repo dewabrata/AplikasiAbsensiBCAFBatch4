@@ -47,4 +47,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //apache word reader
+    implementation("org.apache.poi:poi-ooxml:5.3.0")
 }
