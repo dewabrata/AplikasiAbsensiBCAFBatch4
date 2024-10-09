@@ -33,6 +33,14 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("username", username)
             startActivity(intent)
         }
+
+        val btnNotes = findViewById<androidx.cardview.widget.CardView>(R.id.btnNotes)
+
+        btnNotes.setOnClickListener{
+            val intent = Intent(this, NotesApp::class.java)
+            startActivity(intent)
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rbWFO)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
