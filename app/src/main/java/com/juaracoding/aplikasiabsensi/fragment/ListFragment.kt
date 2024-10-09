@@ -29,6 +29,7 @@ class ListFragment : Fragment() {
     lateinit var sharedPreferences: SharedPreferences
     val PREF_NAME = "Notes"
     lateinit var  isiNotes : MutableList<Notes>
+    lateinit var  listNotes:RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +45,8 @@ class ListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
-        val listNotes:RecyclerView = view.findViewById<RecyclerView>(R.id.lstNotes)
+        listNotes = view.findViewById<RecyclerView>(R.id.lstNotes)
+
         sharedPreferences = requireActivity().getSharedPreferences(PREF_NAME,0)
         loadSharedPreferences()
 
@@ -61,6 +63,7 @@ class ListFragment : Fragment() {
     fun loadSharedPreferences(){
         val allNotes = sharedPreferences.all
         isiNotes = mutableListOf<Notes>()
+        isiNotes.clear()
 
         for((key,value) in allNotes){
             val notes = Notes(key,value.toString())
@@ -68,6 +71,12 @@ class ListFragment : Fragment() {
 
 
         }
+    }
+
+    fun updateDataSharedPreference (){
+        loadSharedPreferences()
+        listNotes.adapter = NotesAdapter(isiNotes)
+        listNotes.adapter?.notifyDataSetChanged()
     }
 
     companion object {

@@ -34,6 +34,12 @@ class NotesFragment : Fragment() {
             saveNotes(txtJudulNote.text.toString(),txtNotes.text.toString())
             txtNotes.setText("")
             txtJudulNote.setText("")
+
+           val listFragment = parentFragmentManager.findFragmentById(R.id.frameListNotes) as ListFragment
+
+            if(listFragment!=null){
+                listFragment.updateDataSharedPreference()
+            }
         }
 
 
