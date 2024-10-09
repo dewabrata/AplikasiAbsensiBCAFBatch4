@@ -47,6 +47,7 @@ class ListFragment : Fragment() {
         dataDummy.add(Notes("Catatan Si Boy", "Ini catatannya"))
         listNotes.adapter = NotesAdapter(dataDummy)
 
+
         return view
     }
 

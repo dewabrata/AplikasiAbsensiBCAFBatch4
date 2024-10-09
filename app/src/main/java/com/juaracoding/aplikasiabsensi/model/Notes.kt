@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Notes(
     val judul: String,
-    val isi: String,
+    var isi: String,
 ):Parcelable

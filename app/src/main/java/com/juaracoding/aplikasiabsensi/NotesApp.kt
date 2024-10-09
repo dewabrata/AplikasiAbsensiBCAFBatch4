@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentActivity
 import com.juaracoding.aplikasiabsensi.fragment.ListFragment
 import com.juaracoding.aplikasiabsensi.fragment.NotesFragment
+import com.juaracoding.aplikasiabsensi.model.Notes
 
 class NotesApp : FragmentActivity() {
 
@@ -23,11 +24,36 @@ class NotesApp : FragmentActivity() {
         }
 
         if(resources.configuration.orientation==Configuration.ORIENTATION_PORTRAIT) {
-            supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, ListFragment())
-                .commit()
+            supportFragmentManager.beginTransaction().setReorderingAllowed(true)
+            supportFragmentManager.beginTransaction().add(R.id.frameListNotes, ListFragment()).commit()
+
+                if(supportFragmentManager.findFragmentById(R.id.frameNotes)!=null){
+                    supportFragmentManager.beginTransaction().remove(supportFragmentManager.findFragmentById(R.id.frameNotes)!!).commit()
+                }
+
+
+
+
+            val notes = Notes("Catatan Si Boy", "Ini catatannya")
+            notes.apply {
+                title = "Catatan Si Boy"
+                isi = "Ini catatannya"
+            }
+
         }else{
-            supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, NotesFragment())
-                .commit()
+//            supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, ListFragment())
+//                .commit()
+//            supportFragmentManager.beginTransaction().replace(R.id.frameNotes, NotesFragment())
+//                .commit()
+
+            supportFragmentManager.beginTransaction().apply {
+                setReorderingAllowed(true)
+
+                add(R.id.frameListNotes, ListFragment())
+                add(R.id.frameNotes, NotesFragment())
+            }.commit()
+
+
 
         }
 
