@@ -63,7 +63,7 @@ class ListFragment : Fragment() {
     fun loadSharedPreferences(){
         val allNotes = sharedPreferences.all
         isiNotes = mutableListOf<Notes>()
-        isiNotes.clear()
+
 
         for((key,value) in allNotes){
             val notes = Notes(key,value.toString())
@@ -73,10 +73,11 @@ class ListFragment : Fragment() {
         }
     }
 
-    fun updateDataSharedPreference (){
-        loadSharedPreferences()
-        listNotes.adapter = NotesAdapter(isiNotes)
-        listNotes.adapter?.notifyDataSetChanged()
+    fun updateDataSharedPreference (notes: Notes){
+
+        isiNotes.add(notes)
+        listNotes.adapter?.notifyItemInserted(isiNotes.size-1)
+
     }
 
     companion object {

@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.juaracoding.aplikasiabsensi.R
+import com.juaracoding.aplikasiabsensi.model.Notes
 
 class NotesFragment : Fragment() {
 
@@ -32,14 +33,18 @@ class NotesFragment : Fragment() {
 
         btnSaveNotes.setOnClickListener{
             saveNotes(txtJudulNote.text.toString(),txtNotes.text.toString())
-            txtNotes.setText("")
-            txtJudulNote.setText("")
+
 
            val listFragment = parentFragmentManager.findFragmentById(R.id.frameListNotes) as ListFragment
 
             if(listFragment!=null){
-                listFragment.updateDataSharedPreference()
+                listFragment.updateDataSharedPreference(Notes(txtJudulNote.text.toString(),txtNotes.text.toString()))
+
+                txtNotes.setText("")
+                txtJudulNote.setText("")
             }
+
+
         }
 
 

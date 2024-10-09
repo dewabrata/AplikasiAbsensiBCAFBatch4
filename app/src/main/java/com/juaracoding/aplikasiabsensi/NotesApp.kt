@@ -25,7 +25,7 @@ class NotesApp : FragmentActivity() {
 
         if(resources.configuration.orientation==Configuration.ORIENTATION_PORTRAIT) {
             supportFragmentManager.beginTransaction().setReorderingAllowed(true)
-            supportFragmentManager.beginTransaction().add(R.id.frameListNotes, ListFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, ListFragment()).commit()
 
                 if(supportFragmentManager.findFragmentById(R.id.frameNotes)!=null){
                     supportFragmentManager.beginTransaction().remove(supportFragmentManager.findFragmentById(R.id.frameNotes)!!).commit()
@@ -42,8 +42,8 @@ class NotesApp : FragmentActivity() {
             supportFragmentManager.beginTransaction().apply {
                 setReorderingAllowed(true)
 
-                add(R.id.frameListNotes, ListFragment())
-                add(R.id.frameNotes, NotesFragment())
+                replace(R.id.frameListNotes, ListFragment())
+                replace(R.id.frameNotes, NotesFragment())
             }.commit()
 
 
