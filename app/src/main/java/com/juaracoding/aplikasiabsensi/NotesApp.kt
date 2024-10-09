@@ -34,17 +34,10 @@ class NotesApp : FragmentActivity() {
 
 
 
-            val notes = Notes("Catatan Si Boy", "Ini catatannya")
-            notes.apply {
-                title = "Catatan Si Boy"
-                isi = "Ini catatannya"
-            }
+
+
 
         }else{
-//            supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, ListFragment())
-//                .commit()
-//            supportFragmentManager.beginTransaction().replace(R.id.frameNotes, NotesFragment())
-//                .commit()
 
             supportFragmentManager.beginTransaction().apply {
                 setReorderingAllowed(true)
