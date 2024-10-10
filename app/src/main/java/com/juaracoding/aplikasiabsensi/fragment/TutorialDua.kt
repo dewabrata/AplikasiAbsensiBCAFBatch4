@@ -1,10 +1,13 @@
 package com.juaracoding.aplikasiabsensi.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import com.juaracoding.aplikasiabsensi.Login
 import com.juaracoding.aplikasiabsensi.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,7 +38,13 @@ class TutorialDua : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tutorial_dua, container, false)
+        val view = inflater.inflate(R.layout.fragment_tutorial_dua, container, false)
+
+        view.findViewById<Button>(R.id.btnSkipLogin).setOnClickListener{
+            val intent = Intent(activity, Login::class.java)
+            startActivity(intent)
+        }
+        return view
     }
 
     companion object {

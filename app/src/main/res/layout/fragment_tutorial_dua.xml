@@ -29,5 +29,15 @@
             android:text="Jangan berikan informasi apapun mengenai access pribadi Anda. Hubungi pihak berwajib jika dirasakan adanya pembobolan password."
             android:textColor="@color/white"
             android:textSize="34sp" />
+
+        <Button
+            android:id="@+id/btnSkipLogin"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="20dp"
+            android:text="Skip and Understand" />
     </LinearLayout>
 </FrameLayout>
