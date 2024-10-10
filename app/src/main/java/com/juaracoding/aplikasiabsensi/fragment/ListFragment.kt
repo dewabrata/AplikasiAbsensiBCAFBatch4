@@ -1,11 +1,13 @@
 package com.juaracoding.aplikasiabsensi.fragment
 
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +33,7 @@ class ListFragment : Fragment() {
     val PREF_NAME = "Notes"
     lateinit var  isiNotes : MutableList<Notes>
     lateinit var  listNotes:RecyclerView
+    lateinit var  btnTambahNotes: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,7 @@ class ListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         listNotes = view.findViewById<RecyclerView>(R.id.lstNotes)
-
+        btnTambahNotes = view.findViewById(R.id.btnTambahNotes)
 
         sharedPreferences = requireActivity().getSharedPreferences(PREF_NAME,0)
         loadSharedPreferences()
@@ -60,14 +63,34 @@ class ListFragment : Fragment() {
             notes: Notes ->
             Toast.makeText(requireContext(), notes.isi, Toast.LENGTH_SHORT).show()
 
-            val fragmentNotes = requireActivity().supportFragmentManager.findFragmentById(R.id.frameNotes)
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                val fragmentNotes =
+                    requireActivity().supportFragmentManager.findFragmentById(R.id.frameNotes)
 
-            if(fragmentNotes!=null){
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.lstNotes,fragmentNotes).commit()
+                if (fragmentNotes != null) {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.lstNotes, fragmentNotes).commit()
+                } else {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameListNotes, NotesFragment.newInstance(notes))
+                        .addToBackStack("notes")
+                        .commit()
+                }
             }else{
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameListNotes,NotesFragment.newInstance(notes))
-                    .addToBackStack("notes")
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.frameNotes, NotesFragment.newInstance(notes))
                     .commit()
+            }
+        }
+
+
+        btnTambahNotes.setOnClickListener{
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.frameListNotes, NotesFragment()).commit()
+            }else{
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.frameNotes, NotesFragment()).commit()
             }
 
         }
@@ -92,8 +115,17 @@ class ListFragment : Fragment() {
 
     fun updateDataSharedPreference (notes: Notes){
 
-        isiNotes.add(notes)
-        listNotes.adapter?.notifyItemInserted(isiNotes.size-1)
+        loadSharedPreferences()
+     var isSameContent = false
+     for(i in isiNotes){
+         if(i.judul == notes.judul){
+             isSameContent = true
+         }
+     }
+        if(!isSameContent) {
+            isiNotes.add(notes)
+            listNotes.adapter?.notifyItemInserted(isiNotes.size - 1)
+        }
 
     }
 

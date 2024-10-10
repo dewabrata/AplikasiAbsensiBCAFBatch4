@@ -46,24 +46,27 @@ class NotesFragment : Fragment() {
                 requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, ListFragment()).commit()
 
             } else {
-                val listFragment =
-                    parentFragmentManager.findFragmentById(R.id.frameListNotes) as ListFragment
+//                val listFragment =
+//                    parentFragmentManager.findFragmentById(R.id.frameListNotes) as ListFragment
+//
+//                if (listFragment != null) {
+//                    listFragment.updateDataSharedPreference(
+//                        Notes(
+//                            txtJudulNote.text.toString(),
+//                            txtNotes.text.toString()
+//                        )
+//                    )
 
-                if (listFragment != null) {
-                    listFragment.updateDataSharedPreference(
-                        Notes(
-                            txtJudulNote.text.toString(),
-                            txtNotes.text.toString()
-                        )
-                    )
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, ListFragment()).commit()
 
-                    txtNotes.setText("")
+
+                txtNotes.setText("")
                     txtJudulNote.setText("")
 
 
 
 
-                }
+
 
 
             }

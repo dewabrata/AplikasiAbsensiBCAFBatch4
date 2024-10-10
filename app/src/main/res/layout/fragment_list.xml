@@ -6,6 +6,13 @@
     android:orientation="vertical"
     tools:context=".fragment.ListFragment">
 
+    <Button
+        android:id="@+id/btnTambahNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Tambah Notes" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lstNotes"
         android:layout_width="match_parent"
