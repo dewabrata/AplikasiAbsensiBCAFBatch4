@@ -59,6 +59,17 @@ class ListFragment : Fragment() {
         listNotes.adapter = NotesAdapter(isiNotes){
             notes: Notes ->
             Toast.makeText(requireContext(), notes.isi, Toast.LENGTH_SHORT).show()
+
+            val fragmentNotes = requireActivity().supportFragmentManager.findFragmentById(R.id.frameNotes)
+
+            if(fragmentNotes!=null){
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.lstNotes,fragmentNotes)
+            }else{
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameListNotes,NotesFragment())
+                    .addToBackStack("notes")
+                    .commit()
+            }
+
         }
 
 

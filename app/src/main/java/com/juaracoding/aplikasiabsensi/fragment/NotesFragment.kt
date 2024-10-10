@@ -1,6 +1,7 @@
 package com.juaracoding.aplikasiabsensi.fragment
 
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,22 +32,32 @@ class NotesFragment : Fragment() {
         txtJudulNote = view.findViewById(R.id.txtJudulNote)
         btnSaveNotes = view.findViewById(R.id.btnSaveNotes)
 
-        btnSaveNotes.setOnClickListener{
-            saveNotes(txtJudulNote.text.toString(),txtNotes.text.toString())
+        btnSaveNotes.setOnClickListener {
+            saveNotes(txtJudulNote.text.toString(), txtNotes.text.toString())
+
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameListNotes, ListFragment()).commit()
+
+            } else {
+                val listFragment =
+                    parentFragmentManager.findFragmentById(R.id.frameListNotes) as ListFragment
+
+                if (listFragment != null) {
+                    listFragment.updateDataSharedPreference(
+                        Notes(
+                            txtJudulNote.text.toString(),
+                            txtNotes.text.toString()
+                        )
+                    )
+
+                    txtNotes.setText("")
+                    txtJudulNote.setText("")
+                }
 
 
-           val listFragment = parentFragmentManager.findFragmentById(R.id.frameListNotes) as ListFragment
-
-            if(listFragment!=null){
-                listFragment.updateDataSharedPreference(Notes(txtJudulNote.text.toString(),txtNotes.text.toString()))
-
-                txtNotes.setText("")
-                txtJudulNote.setText("")
             }
-
-
         }
-
 
         return view
     }

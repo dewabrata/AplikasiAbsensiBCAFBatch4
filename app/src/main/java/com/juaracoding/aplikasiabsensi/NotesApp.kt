@@ -30,13 +30,6 @@ class NotesApp : FragmentActivity() {
                 if(supportFragmentManager.findFragmentById(R.id.frameNotes)!=null){
                     supportFragmentManager.beginTransaction().remove(supportFragmentManager.findFragmentById(R.id.frameNotes)!!).commit()
                 }
-
-
-
-
-
-
-
         }else{
 
             supportFragmentManager.beginTransaction().apply {
