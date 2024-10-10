@@ -43,7 +43,7 @@ class TutorialDua : Fragment() {
         view.findViewById<Button>(R.id.btnSkipLogin).setOnClickListener{
             val intent = Intent(activity, Login::class.java)
             startActivity(intent)
-        }
+            requireActivity().finish()        }
         return view
     }
 
