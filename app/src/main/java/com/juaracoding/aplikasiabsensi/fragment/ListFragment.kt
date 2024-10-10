@@ -63,9 +63,9 @@ class ListFragment : Fragment() {
             val fragmentNotes = requireActivity().supportFragmentManager.findFragmentById(R.id.frameNotes)
 
             if(fragmentNotes!=null){
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.lstNotes,fragmentNotes)
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.lstNotes,fragmentNotes).commit()
             }else{
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameListNotes,NotesFragment())
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameListNotes,NotesFragment.newInstance(notes))
                     .addToBackStack("notes")
                     .commit()
             }
@@ -87,6 +87,7 @@ class ListFragment : Fragment() {
 
 
         }
+
     }
 
     fun updateDataSharedPreference (notes: Notes){

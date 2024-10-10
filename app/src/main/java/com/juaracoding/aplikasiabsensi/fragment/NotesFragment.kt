@@ -3,6 +3,7 @@ package com.juaracoding.aplikasiabsensi.fragment
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,11 @@ class NotesFragment : Fragment() {
         txtJudulNote = view.findViewById(R.id.txtJudulNote)
         btnSaveNotes = view.findViewById(R.id.btnSaveNotes)
 
+        arguments?.getParcelable<Notes>("notes")?.let {
+            txtNotes.setText(it.isi)
+            txtJudulNote.setText(it.judul)
+        }
+
         btnSaveNotes.setOnClickListener {
             saveNotes(txtJudulNote.text.toString(), txtNotes.text.toString())
 
@@ -53,6 +59,10 @@ class NotesFragment : Fragment() {
 
                     txtNotes.setText("")
                     txtJudulNote.setText("")
+
+
+
+
                 }
 
 
@@ -76,6 +86,19 @@ class NotesFragment : Fragment() {
         sharedPreferences = requireActivity().getSharedPreferences(PREF_NAME,0)
         return sharedPreferences.getString(judul,"").toString()
 
+    }
+
+
+    companion object {
+
+        fun newInstance(notes: Notes):NotesFragment{
+          return  NotesFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable("notes", notes)
+                }
+            }
+
+        }
     }
 
 }
