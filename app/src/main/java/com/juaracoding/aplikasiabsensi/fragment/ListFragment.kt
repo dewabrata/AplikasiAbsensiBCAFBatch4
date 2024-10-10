@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.juaracoding.aplikasiabsensi.R
@@ -47,6 +48,7 @@ class ListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         listNotes = view.findViewById<RecyclerView>(R.id.lstNotes)
 
+
         sharedPreferences = requireActivity().getSharedPreferences(PREF_NAME,0)
         loadSharedPreferences()
 
@@ -54,7 +56,10 @@ class ListFragment : Fragment() {
 //        dataDummy.add(Notes("Catatan Si Boy", "Ini catatannya"))
         listNotes.layoutManager = LinearLayoutManager(requireContext())
 
-        listNotes.adapter = NotesAdapter(isiNotes)
+        listNotes.adapter = NotesAdapter(isiNotes){
+            notes: Notes ->
+            Toast.makeText(requireContext(), notes.isi, Toast.LENGTH_SHORT).show()
+        }
 
 
         return view
