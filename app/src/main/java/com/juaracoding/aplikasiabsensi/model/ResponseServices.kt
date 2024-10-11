@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class Response(
+data class ResponseServices(
 
 	@field:SerializedName("message")
 	val message: String? = null,
