@@ -62,7 +62,8 @@ class DocumentReimbursment : AppCompatActivity() {
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
             val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-            val timeDialog = DatePickerDialog(this,{_,year,month,dayOfMonth -> txtTanggalReimbursment.setText("$year-${month+1}-$dayOfMonth")},year,month,dayOfMonth)
+            val timeDialog = DatePickerDialog(this,{_,year,month,dayOfMonth ->
+                txtTanggalReimbursment.setText("$year-${month+1}-$dayOfMonth")},year,month,dayOfMonth)
 
             timeDialog.show()
         }
