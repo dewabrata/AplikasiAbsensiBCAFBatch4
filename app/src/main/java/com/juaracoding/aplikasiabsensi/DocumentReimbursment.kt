@@ -31,8 +31,6 @@ class DocumentReimbursment : AppCompatActivity() {
             insets
         }
 
-        btnUploadDoc = findViewById(R.id.btnUploadDocument)
-        txtUploadDoc = findViewById(R.id.txtDocument)
 
         btnUploadDoc.setOnClickListener{
 
