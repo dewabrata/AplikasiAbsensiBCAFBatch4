@@ -7,6 +7,7 @@ import android.provider.MediaStore
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.BuildCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 

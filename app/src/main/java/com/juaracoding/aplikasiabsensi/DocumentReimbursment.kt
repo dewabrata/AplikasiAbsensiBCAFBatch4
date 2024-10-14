@@ -23,6 +23,7 @@ import com.juaracoding.aplikasiabsensi.services.NetworkConfig
 import kotlinx.coroutines.launch
 import okhttp3.Callback
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -165,8 +166,8 @@ class DocumentReimbursment : AppCompatActivity() {
 
 
 
-        val username =  RequestBody.create(MediaType.parse("text/plain"),txtUsername.text.toString())
-        val tanggal = RequestBody.create(MediaType.parse("text/plain"),txtTanggalReimbursment.text.toString())
+        val username =  RequestBody.create("text/plain".toMediaTypeOrNull(),txtUsername.text.toString())
+        val tanggal = RequestBody.create("text/plain".toMediaTypeOrNull(),txtTanggalReimbursment.text.toString())
 
         val file = File(cacheDir,"temp.png")
         val fos = FileOutputStream(file)
@@ -174,7 +175,7 @@ class DocumentReimbursment : AppCompatActivity() {
         fos.flush()
         fos.close()
 
-        val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),file)
+        val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),file)
         val foto = MultipartBody.Part.createFormData("fotosurat",file.name,requestFile)
 
 

@@ -15,17 +15,25 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField ("String", "API_KEY", project.properties["x-api-key"].toString())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildFeatures {
+            buildConfig = true
+        }
+
     }
 
     buildTypes {
+
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+
         }
     }
     compileOptions {
