@@ -15,7 +15,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField ("String", "API_KEY", project.properties["x-api-key"].toString())
+        buildConfigField ("String", "API_KEY", '"'+project.properties["x-api-key"].toString()+'"')
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildFeatures {
