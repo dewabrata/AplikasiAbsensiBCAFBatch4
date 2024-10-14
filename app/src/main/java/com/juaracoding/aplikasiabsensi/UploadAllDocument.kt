@@ -25,6 +25,9 @@ class UploadAllDocument : AppCompatActivity() {
     lateinit var imgKtp : ImageView
     lateinit var imgKK : ImageView
     lateinit var imgNPWP : ImageView
+    lateinit var imageUriKK :Bitmap
+    lateinit var imageUriKTP :Bitmap
+    lateinit var imageUriNPWP :Bitmap
 
 
     fun initComponent(){
@@ -49,6 +52,10 @@ class UploadAllDocument : AppCompatActivity() {
             selectImageNPWP()
         }
 
+        btnSendData.setOnClickListener{
+            sendData()
+        }
+
     }
 
     fun selectImageKTP(){
@@ -59,8 +66,8 @@ class UploadAllDocument : AppCompatActivity() {
 
     private val resultLauncherKtp = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val imageUriKtp = result.data?.extras?.get("data") as Bitmap
-            imgKtp.setImageBitmap(imageUriKtp)
+            imageUriKTP = result.data?.extras?.get("data") as Bitmap
+            imgKtp.setImageBitmap(imageUriKTP)
         }
 
     }
@@ -72,7 +79,7 @@ class UploadAllDocument : AppCompatActivity() {
 
     private val resultLauncherKK = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val imageUriKK = result.data?.extras?.get("data") as Bitmap
+            imageUriKK = result.data?.extras?.get("data") as Bitmap
             imgKK.setImageBitmap(imageUriKK)
         }
 
@@ -85,13 +92,23 @@ class UploadAllDocument : AppCompatActivity() {
 
     private val resultLauncherNPWP = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val imageUriNPWP = result.data?.extras?.get("data") as Bitmap
+            imageUriNPWP = result.data?.extras?.get("data") as Bitmap
             imgNPWP.setImageBitmap(imageUriNPWP)
         }
 
     }
 
     fun sendData(){
+
+        val username = txtUsername.text.toString()
+        val tanggal = txtTanggal.text.toString()
+
+        if (username.isNotEmpty() && tanggal.isNotEmpty() && imageUriKK != null && imageUriKTP != null && imageUriNPWP != null){
+
+
+
+
+        }
 
     }
 
