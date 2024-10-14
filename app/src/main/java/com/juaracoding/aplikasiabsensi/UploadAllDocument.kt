@@ -25,9 +25,9 @@ class UploadAllDocument : AppCompatActivity() {
     lateinit var imgKtp : ImageView
     lateinit var imgKK : ImageView
     lateinit var imgNPWP : ImageView
-    lateinit var imageUriKK :Bitmap
-    lateinit var imageUriKTP :Bitmap
-    lateinit var imageUriNPWP :Bitmap
+    var imageUriKK : Bitmap? =null
+    var imageUriKTP :Bitmap? =null
+    var imageUriNPWP :Bitmap? =null
 
 
     fun initComponent(){
@@ -103,7 +103,7 @@ class UploadAllDocument : AppCompatActivity() {
         val username = txtUsername.text.toString()
         val tanggal = txtTanggal.text.toString()
 
-        if (username.isNotEmpty() && tanggal.isNotEmpty() && imageUriKK != null && imageUriKTP != null && imageUriNPWP != null){
+        if (username.isNotEmpty() && tanggal.isNotEmpty() && imageUriKTP != null && imageUriKK!=null && imageUriNPWP != null){
 
 
 
