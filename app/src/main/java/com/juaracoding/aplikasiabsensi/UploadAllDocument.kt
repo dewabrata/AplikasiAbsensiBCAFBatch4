@@ -11,10 +11,17 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.BuildCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.juaracoding.aplikasiabsensi.viewmodel.PengajuanCreditViewModel
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.Request
+import okhttp3.RequestBody
 import java.io.File
 import java.io.FileOutputStream
 
@@ -33,6 +40,9 @@ class UploadAllDocument : AppCompatActivity() {
     var imageUriKTP :Bitmap? =null
     var imageUriNPWP :Bitmap? =null
 
+    //inisiasi PengajuanCreditViewModel
+    private val viewModel: PengajuanCreditViewModel by viewModels()
+
 
     fun initComponent(){
         txtUsername = findViewById(R.id.txtUsernameCredit)
@@ -45,6 +55,7 @@ class UploadAllDocument : AppCompatActivity() {
         imgKK = findViewById(R.id.imgKK)
         imgNPWP = findViewById(R.id.imgNPWP)
 
+        txtUsername.setText(viewModel.getSharePreferencesLogin("username").toString())
         btnKTP.setOnClickListener{
             selectImageKTP()
         }
@@ -112,7 +123,16 @@ class UploadAllDocument : AppCompatActivity() {
             val fileKTP = createFile(imageUriKTP!!,"ktp.png")
             val fileKK = createFile(imageUriKK!!,"kk.png")
             val fileNPWP = createFile(imageUriNPWP!!,"npwp.png")
+//MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
 
+            val rbKtp =   MultipartBody.Part.createFormData("foto_ktp", fileKTP.getName(), RequestBody.create("image/jpg".toMediaType(), fileKTP))
+
+            val rbKK = MultipartBody.Part.createFormData("foto_kk", fileKTP.getName(), RequestBody.create("image/jpg".toMediaType(), fileKK))
+            val rbNPWP = MultipartBody.Part.createFormData("foto_npwp", fileKTP.getName(), RequestBody.create("image/jpg".toMediaType(), fileNPWP))
+            val rbUsername = RequestBody.create("text/plain".toMediaTypeOrNull(),username)
+            val rbTanggal = RequestBody.create("text/plain".toMediaTypeOrNull(),tanggal)
+
+            viewModel.postDataCredit(rbUsername,rbKK,rbKtp,rbNPWP,rbTanggal)
 
 
 
@@ -136,6 +156,7 @@ class UploadAllDocument : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_upload_all_document)
         initComponent()
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

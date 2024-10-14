@@ -8,21 +8,24 @@ import androidx.lifecycle.MutableLiveData
 import com.juaracoding.aplikasiabsensi.model.ResponseServices
 import com.juaracoding.aplikasiabsensi.services.NetworkConfig
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 
 class PengajuanCreditViewModel(application: Application) : AndroidViewModel(application) {
     private val _post = MutableLiveData<ResponseServices>()
+    private val  application: Application
+
     val post: LiveData<ResponseServices>
               get() = _post
-    lateinit var application: Application
+
 
 
     init{
         this.application = application
     }
 
-    fun postDataCredit(username:String,fotoKK:MultipartBody.Part,fotoKTP:MultipartBody.Part,fotoNPWP:MultipartBody.Part,tanggal:String){
+    fun postDataCredit(username:RequestBody,fotoKK:MultipartBody.Part,fotoKTP:MultipartBody.Part,fotoNPWP:MultipartBody.Part,tanggal:RequestBody){
         NetworkConfig().getServicePengajuanCredit().addPengajuanCredit(username,fotoKK,fotoKTP,fotoNPWP,tanggal).enqueue(object : retrofit2.Callback<ResponseServices>{
             override fun onResponse(p0: Call<ResponseServices>, p1: Response<ResponseServices>) {
                _post.postValue(p1.body())
