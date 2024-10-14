@@ -8,11 +8,14 @@ import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.io.File
+import java.io.FileOutputStream
 
 class UploadAllDocument : AppCompatActivity() {
 
@@ -105,11 +108,26 @@ class UploadAllDocument : AppCompatActivity() {
 
         if (username.isNotEmpty() && tanggal.isNotEmpty() && imageUriKTP != null && imageUriKK!=null && imageUriNPWP != null){
 
+            val fileKTP = createFile(imageUriKTP!!,"ktp.png")
+            val fileKK = createFile(imageUriKK!!,"kk.png")
+            val fileNPWP = createFile(imageUriNPWP!!,"npwp.png")
 
 
 
+
+        }else{
+            Toast.makeText(this, "Data belum lengkap", Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    fun createFile(bitmap: Bitmap, tempName :String):File{
+        val file = File(cacheDir,tempName)
+        val fos = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,fos)
+        fos.flush()
+        fos.close()
+        return file
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
