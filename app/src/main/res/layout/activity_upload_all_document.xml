@@ -40,7 +40,7 @@
 
             <ImageView
                 android:id="@+id/imgKTP"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/ktp_card" />
@@ -60,7 +60,7 @@
 
             <ImageView
                 android:id="@+id/imgKK"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/kk_card" />
