@@ -13,7 +13,7 @@ interface ReimburstmentServices {
 
     @Multipart
     @POST("reimbursment/add")
-     fun addDocument(@Header("X-Api-Key") apiKey: String,
+     fun addDocument(
                             @Part("username") username:RequestBody,
                             @Part("tanggal") tanggal:RequestBody,
                             @Part fotosurat: MultipartBody.Part

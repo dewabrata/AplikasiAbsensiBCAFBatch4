@@ -181,7 +181,7 @@ class DocumentReimbursment : AppCompatActivity() {
 
 
 
-        val callService = NetworkConfig().getServiceReimburstment().addDocument("67FC26AEA770E3ED25A1F9B1EBCB7408",username,tanggal,foto)
+        val callService = NetworkConfig().getServiceReimburstment().addDocument(username,tanggal,foto)
 
         callService.enqueue(object : retrofit2.Callback<ResponseServices> {
             override fun onResponse(p0: Call<ResponseServices>, p1: Response<ResponseServices>) {
