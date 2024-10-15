@@ -15,7 +15,6 @@ class CreditAdapter(val creditList: List<PengajuanCreditItem>) : RecyclerView.Ad
 
     inner class CreditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var llCredit = itemView.findViewById<LinearLayout>(R.id.linearLayoutCredit)
         var txtUsernameItemCredit = itemView.findViewById<TextView>(R.id.txtUsernameItemCredit)
         var txtTanggalItemCredit = itemView.findViewById<TextView>(R.id.txtTanggalItemCredit)
         var imgKtpItem = itemView.findViewById<ImageView>(R.id.imgKtpItem)
@@ -38,7 +37,7 @@ class CreditAdapter(val creditList: List<PengajuanCreditItem>) : RecyclerView.Ad
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return  creditList.size
     }
 
     override fun onBindViewHolder(holder: CreditViewHolder, position: Int) {

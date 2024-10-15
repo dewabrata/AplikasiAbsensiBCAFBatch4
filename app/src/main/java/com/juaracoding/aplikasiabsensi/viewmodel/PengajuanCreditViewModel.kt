@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.juaracoding.aplikasiabsensi.model.ResponseCredit
 import com.juaracoding.aplikasiabsensi.model.ResponseServices
 import com.juaracoding.aplikasiabsensi.services.NetworkConfig
 import okhttp3.MultipartBody
@@ -18,6 +19,11 @@ class PengajuanCreditViewModel(application: Application) : AndroidViewModel(appl
 
     val post: LiveData<ResponseServices>
               get() = _post
+
+    private val _getPengajuanCredit = MutableLiveData<ResponseCredit>()
+
+    val getPengajuanCredit: LiveData<ResponseCredit>
+        get() = _getPengajuanCredit
 
 
 
@@ -36,6 +42,21 @@ class PengajuanCreditViewModel(application: Application) : AndroidViewModel(appl
             }
 
         })
+    }
+
+    fun getPengajuanCredit() {
+        NetworkConfig().getServicePengajuanCredit().getAllPengajuanCredit()
+            .enqueue(object : retrofit2.Callback<ResponseCredit> {
+                override fun onResponse(p0: Call<ResponseCredit>, p1: Response<ResponseCredit>) {4
+                  _getPengajuanCredit.postValue(p1.body())
+                }
+
+                override fun onFailure(p0: Call<ResponseCredit>, p1: Throwable) {
+
+                }
+
+
+            })
     }
 
     fun getSharePreferencesLogin(key:String):String{
