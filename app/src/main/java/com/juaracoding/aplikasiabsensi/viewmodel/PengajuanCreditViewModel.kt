@@ -29,6 +29,7 @@ class PengajuanCreditViewModel(application: Application) : AndroidViewModel(appl
 
     init{
         this.application = application
+        getPengajuanCredit()
     }
 
     fun postDataCredit(username:RequestBody,fotoKK:MultipartBody.Part,fotoKTP:MultipartBody.Part,fotoNPWP:MultipartBody.Part,tanggal:RequestBody){
