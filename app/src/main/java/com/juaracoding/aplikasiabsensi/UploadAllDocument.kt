@@ -123,7 +123,6 @@ class UploadAllDocument : AppCompatActivity() {
             val fileKTP = createFile(imageUriKTP!!,"ktp.png")
             val fileKK = createFile(imageUriKK!!,"kk.png")
             val fileNPWP = createFile(imageUriNPWP!!,"npwp.png")
-//MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
 
             val rbKtp =   MultipartBody.Part.createFormData("foto_ktp", fileKTP.getName(), RequestBody.create("image/jpg".toMediaType(), fileKTP))
 

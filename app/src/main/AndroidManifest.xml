@@ -16,8 +16,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".PengajuanCreditList"
+            android:exported="false" />
+        <activity
             android:name=".UploadAllDocument"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,12 +29,10 @@
         </activity>
         <activity
             android:name=".DocumentReimbursment"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Tutorial"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".NotesApp"
             android:exported="false" />
