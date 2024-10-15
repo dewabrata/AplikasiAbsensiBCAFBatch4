@@ -50,6 +50,7 @@ class PengajuanCreditViewModel(application: Application) : AndroidViewModel(appl
             .enqueue(object : retrofit2.Callback<ResponseCredit> {
                 override fun onResponse(p0: Call<ResponseCredit>, p1: Response<ResponseCredit>) {4
                   _getPengajuanCredit.postValue(p1.body())
+
                 }
 
                 override fun onFailure(p0: Call<ResponseCredit>, p1: Throwable) {

@@ -1,6 +1,8 @@
 package com.juaracoding.aplikasiabsensi
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +20,7 @@ class PengajuanCreditList : AppCompatActivity() {
 
 
     lateinit var  lstPengajuanCredit: RecyclerView
+    lateinit var btnTambahCredit: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +32,16 @@ class PengajuanCreditList : AppCompatActivity() {
             insets
         }
 
+        btnTambahCredit = findViewById(R.id.btnTambahKredit)
+
+        btnTambahCredit.setOnClickListener{
+            val intent = Intent(this, UploadAllDocument::class.java)
+            startActivity(intent)
+        }
 
         lstPengajuanCredit = findViewById(R.id.lstPengajuanCredit)
         lstPengajuanCredit.layoutManager = LinearLayoutManager(this)
+
         viewModel = ViewModelProvider(this).get(PengajuanCreditViewModel::class.java)
 
 
@@ -50,6 +60,12 @@ class PengajuanCreditList : AppCompatActivity() {
 
         }
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getPengajuanCredit()
 
     }
 }

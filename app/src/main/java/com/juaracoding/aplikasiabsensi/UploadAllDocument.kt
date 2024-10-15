@@ -131,7 +131,9 @@ class UploadAllDocument : AppCompatActivity() {
             val rbUsername = RequestBody.create("text/plain".toMediaTypeOrNull(),username)
             val rbTanggal = RequestBody.create("text/plain".toMediaTypeOrNull(),tanggal)
 
+
             viewModel.postDataCredit(rbUsername,rbKK,rbKtp,rbNPWP,rbTanggal)
+
 
 
 
@@ -155,6 +157,13 @@ class UploadAllDocument : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_upload_all_document)
         initComponent()
+
+
+        viewModel.post.observe(this){
+           if (it.status == true){
+               finish()
+           }
+        }
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
