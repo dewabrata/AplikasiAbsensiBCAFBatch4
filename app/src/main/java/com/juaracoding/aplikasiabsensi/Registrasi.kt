@@ -40,7 +40,7 @@ class Registrasi : AppCompatActivity() {
         txtPassword = findViewById(R.id.txtPassword)
         txtConfirmPassword = findViewById(R.id.txtPassword2)
 
-        btnRegister = findViewById(R.id.btnRegister)
+        btnRegister = findViewById(R.id.btnRegisterAuth)
 
         btnRegister.setOnClickListener{
             if(txtEmail.text.toString() != "" && txtPassword.text.toString() != "" && txtConfirmPassword.text.toString() != ""){

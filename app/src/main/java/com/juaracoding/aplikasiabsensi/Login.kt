@@ -14,6 +14,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.FirebaseAuth
 
 class Login : AppCompatActivity() {
 
@@ -23,12 +24,14 @@ class Login : AppCompatActivity() {
     private val PREF_NAME = "LOGIN"
     private val USER_IS_LOGIN = "username"
     private lateinit var sharedPreferences: SharedPreferences
+    lateinit var auth : FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+        auth = FirebaseAuth.getInstance()
         sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE)
 
 
@@ -58,20 +61,29 @@ class Login : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             if (txtUsername.text.toString() != "") {
+                auth.signInWithEmailAndPassword(txtUsername.text.toString(), txtPassword.text.toString())
+                    .addOnCompleteListener(this){
+                        if(it.isSuccessful){
+                            rotateLogo(imageLogo)
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.putExtra("username", txtUsername.text.toString())
+                            startActivity(intent)
+                        }
+                    }
+                    .addOnFailureListener(this){
+                        Toast.makeText(this, "Login Gagal "+it.message, Toast.LENGTH_LONG).show()
+                    }
 
-                val editor = sharedPreferences.edit()
-                editor.putString(USER_IS_LOGIN, txtUsername.text.toString())
-                editor.apply()
+//                val editor = sharedPreferences.edit()
+//                editor.putString(USER_IS_LOGIN, txtUsername.text.toString())
+//                editor.apply()
+//
+//
+//                Toast.makeText(
+//                    this, "Username : ${txtUsername.text} Password : " +
+//                            "${txtPassword.text}", Toast.LENGTH_LONG
+//                ).show()
 
-
-                Toast.makeText(
-                    this, "Username : ${txtUsername.text} Password : " +
-                            "${txtPassword.text}", Toast.LENGTH_LONG
-                ).show()
-                rotateLogo(imageLogo)
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("username", txtUsername.text.toString())
-                startActivity(intent)
             }else{
                 Toast.makeText(this, "Username Tidak Boleh Kosong", Toast.LENGTH_LONG).show()
             }
