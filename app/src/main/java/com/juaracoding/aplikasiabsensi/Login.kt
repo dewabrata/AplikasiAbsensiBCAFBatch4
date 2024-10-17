@@ -2,6 +2,7 @@ package com.juaracoding.aplikasiabsensi
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.animation.AnimationUtils
@@ -12,9 +13,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import java.util.jar.Manifest
 
 class Login : AppCompatActivity() {
 
@@ -26,6 +30,11 @@ class Login : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     lateinit var auth : FirebaseAuth
 
+    //tambahkan permission
+    private val REQUEST_LOCATION_PERMISSION = 1
+    private val REQUEST_COARSE_PERMISSION = 2
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +43,14 @@ class Login : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE)
 
+        checkPermissionLocation()
 
         val txtUsername = findViewById<EditText>(R.id.txtUsername)
         val txtPassword = findViewById<EditText>(R.id.editTextTextPassword)
+
+        txtUsername.setText( "")
+        txtPassword.setText("")
+
         imageLogo = findViewById<ImageView>(R.id.logoImage)
 
         if(sharedPreferences.contains(USER_IS_LOGIN)){
@@ -60,7 +74,8 @@ class Login : AppCompatActivity() {
 
 
         btnLogin.setOnClickListener {
-            if (txtUsername.text.toString() != "") {
+            if (txtUsername.text.toString() != "" && txtPassword.text.toString() != "") {
+               try {
                 auth.signInWithEmailAndPassword(txtUsername.text.toString(), txtPassword.text.toString())
                     .addOnCompleteListener(this){
                         if(it.isSuccessful){
@@ -73,6 +88,10 @@ class Login : AppCompatActivity() {
                     .addOnFailureListener(this){
                         Toast.makeText(this, "Login Gagal "+it.message, Toast.LENGTH_LONG).show()
                     }
+
+            }catch (exception:Exception){
+                Toast.makeText(this,"Error",Toast.LENGTH_LONG).show()
+            }
 
 //                val editor = sharedPreferences.edit()
 //                editor.putString(USER_IS_LOGIN, txtUsername.text.toString())
@@ -130,5 +149,42 @@ class Login : AppCompatActivity() {
     fun rotateLogo(logo: ImageView) {
         val animateLogo = AnimationUtils.loadAnimation(this, R.anim.logorotation)
         logo.startAnimation(animateLogo)
+    }
+
+
+    fun checkPermissionLocation(){
+        if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),REQUEST_LOCATION_PERMISSION)
+
+
+        }
+
+        if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),REQUEST_COARSE_PERMISSION)
+
+
+        }
+
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == REQUEST_LOCATION_PERMISSION){
+            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+
+            }
+        }
     }
 }
