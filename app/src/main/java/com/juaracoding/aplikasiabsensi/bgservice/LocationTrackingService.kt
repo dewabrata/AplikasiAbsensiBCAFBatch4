@@ -1,9 +1,13 @@
 package com.juaracoding.aplikasiabsensi.bgservice
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.IBinder
 import android.os.Looper
 import android.util.Log
@@ -22,9 +26,21 @@ class LocationTrackingService : Service() {
 
     private lateinit var fusedLocationClient : FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
+    private lateinit var locationRequest: LocationRequest
 
     override fun onCreate() {
         super.onCreate()
+
+        createNotificationChannel()
+
+        locationRequest = LocationRequest.Builder(
+            Priority.PRIORITY_HIGH_ACCURACY,
+            10000
+        ).setWaitForAccurateLocation(false)
+            .setMinUpdateIntervalMillis(5000)
+            .setMaxUpdateDelayMillis(6000)
+            .build()
+
         //inisiasasi fusedLocation
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -36,10 +52,19 @@ class LocationTrackingService : Service() {
             }
         }
 
-        //startService()
+        startService()
 
-        startService(Intent(this,LocationTrackingService::class.java))
+     //  startService(Intent(this,LocationTrackingService::class.java))
+          startLocationUpdates()
+    }
 
+    @SuppressLint("MissingPermission")
+    private fun startLocationUpdates() {
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            Looper.getMainLooper()
+        )
     }
 
     fun startService() {
@@ -53,15 +78,21 @@ class LocationTrackingService : Service() {
         startForeground(1,notification)
     }
 
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val serviceChannel = NotificationChannel(
+                "location_tracking",
+                "Location Tracking Service Channel",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            val manager = getSystemService(NotificationManager::class.java)
+            manager?.createNotificationChannel(serviceChannel)
+        }
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
-        val locationRequest = LocationRequest.Builder(
-            Priority.PRIORITY_HIGH_ACCURACY,
-            10000
-        ).setWaitForAccurateLocation(false)
-            .setMinUpdateIntervalMillis(5000)
-            .setMaxUpdateDelayMillis(6000)
-            .build()
+
 
         if (ActivityCompat.checkSelfPermission(
                 this,
