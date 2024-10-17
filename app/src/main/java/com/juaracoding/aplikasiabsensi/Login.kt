@@ -218,7 +218,7 @@ class Login : AppCompatActivity() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
 
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,5f,object:
+            locationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER,5000,5f,object:
                 LocationListener {
                 override fun onLocationChanged(location: Location) {
                     txtGPS.text = "Latitude "+location.latitude +" | Longitude " + location.longitude

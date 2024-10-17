@@ -7,15 +7,25 @@ import android.provider.MediaStore
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.os.BuildCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.juaracoding.aplikasiabsensi.bgservice.LocationTrackingService
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        //menjalankan service
+        val intent = Intent(this,LocationTrackingService::class.java)
+        ContextCompat.startForegroundService(applicationContext,intent)
+
+
+
+
         val username = intent.getStringExtra("username")
         val textView = findViewById<TextView>(R.id.textView3)
         textView.text = "Selamat Datang  \n, $username"
