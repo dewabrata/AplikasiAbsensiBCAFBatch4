@@ -3,6 +3,9 @@ package com.juaracoding.aplikasiabsensi
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.animation.AnimationUtils
@@ -25,6 +28,9 @@ class Login : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var btnRegister: Button
     private lateinit var imageLogo: ImageView
+    private lateinit var txtGPS : TextView
+
+
     private val PREF_NAME = "LOGIN"
     private val USER_IS_LOGIN = "username"
     private lateinit var sharedPreferences: SharedPreferences
@@ -33,6 +39,8 @@ class Login : AppCompatActivity() {
     //tambahkan permission
     private val REQUEST_LOCATION_PERMISSION = 1
     private val REQUEST_COARSE_PERMISSION = 2
+
+    private lateinit  var locationManager : LocationManager
 
 
 
@@ -47,6 +55,7 @@ class Login : AppCompatActivity() {
 
         val txtUsername = findViewById<EditText>(R.id.txtUsername)
         val txtPassword = findViewById<EditText>(R.id.editTextTextPassword)
+        txtGPS = findViewById(R.id.txtGPS)
 
         txtUsername.setText( "")
         txtPassword.setText("")
@@ -160,6 +169,9 @@ class Login : AppCompatActivity() {
                 arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),REQUEST_LOCATION_PERMISSION)
 
 
+        }else{
+
+            getLocation()
         }
 
         if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -183,8 +195,40 @@ class Login : AppCompatActivity() {
         if(requestCode == REQUEST_LOCATION_PERMISSION){
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
-
+                getLocation()
             }
         }
+
+        if(requestCode == REQUEST_COARSE_PERMISSION){
+            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+            }
+
+            }
+    }
+
+
+    fun getLocation(){
+
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,5f,object:
+                LocationListener {
+                override fun onLocationChanged(location: Location) {
+                    txtGPS.text = "Latitude "+location.latitude +" | Longitude " + location.longitude
+                }
+
+            })
+            return
+        }
+
+
+
     }
 }

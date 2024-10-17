@@ -90,13 +90,14 @@
         android:id="@+id/lblBcaFinance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="52dp"
         android:text="bcafinance.co.id"
         android:textColor="@color/material_dynamic_primary30"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -113,4 +114,14 @@
         app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+
+    <TextView
+        android:id="@+id/txtGPS"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblBcaFinance" />
 </androidx.constraintlayout.widget.ConstraintLayout>
