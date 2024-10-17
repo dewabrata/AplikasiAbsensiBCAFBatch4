@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat
 class Login : AppCompatActivity() {
 
     private lateinit var btnLogin: Button
+    private lateinit var btnRegister: Button
     private lateinit var imageLogo: ImageView
     private val PREF_NAME = "LOGIN"
     private val USER_IS_LOGIN = "username"
@@ -48,7 +49,7 @@ class Login : AppCompatActivity() {
 
         btnLogin = findViewById(R.id.btnLogin)
 
-       val  btnRegister = findViewById<Button>(R.id.btnRegister)
+        btnRegister = findViewById<Button>(R.id.btnRegister)
         btnRegister.setOnClickListener{
             val intent = Intent(this, Registrasi::class.java)
             startActivity(intent)
@@ -74,6 +75,8 @@ class Login : AppCompatActivity() {
             }else{
                 Toast.makeText(this, "Username Tidak Boleh Kosong", Toast.LENGTH_LONG).show()
             }
+
+
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rbWFO)) { v, insets ->
@@ -81,7 +84,7 @@ class Login : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        Toast.makeText(this, "Fungsi OnCreate Activate", Toast.LENGTH_LONG).show()
+      //  Toast.makeText(this, "Fungsi OnCreate Activate", Toast.LENGTH_LONG).show()
 
 
     }
@@ -89,26 +92,26 @@ class Login : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Toast.makeText(this, "Fungsi OnStart Activate", Toast.LENGTH_LONG).show()
+     //   Toast.makeText(this, "Fungsi OnStart Activate", Toast.LENGTH_LONG).show()
 
 
     }
 
     override fun onRestart() {
         super.onRestart()
-        Toast.makeText(this, "Fungsi OnRestart Activate", Toast.LENGTH_LONG).show()
+     //   Toast.makeText(this, "Fungsi OnRestart Activate", Toast.LENGTH_LONG).show()
 
     }
 
     override fun onResume() {
         super.onResume()
-        Toast.makeText(this, "Fungsi OnResume Activate", Toast.LENGTH_LONG).show()
+      //  Toast.makeText(this, "Fungsi OnResume Activate", Toast.LENGTH_LONG).show()
         rotateLogo(imageLogo)
     }
 
     override fun onStop() {
         super.onStop()
-        Toast.makeText(this, "Fungsi OnStop Activate", Toast.LENGTH_LONG).show()
+      //  Toast.makeText(this, "Fungsi OnStop Activate", Toast.LENGTH_LONG).show()
 
     }
 
