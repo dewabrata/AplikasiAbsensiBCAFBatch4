@@ -32,7 +32,7 @@ class LocationTrackingService : Service() {
             override fun onLocationResult(p0: LocationResult) {
                 super.onLocationResult(p0)
                 for(location in p0.locations)
-                Log.d("Location Provider :", " "+location.altitude + " " + location.longitude)
+                 Log.d("Location Provider :", " "+location.altitude + " " + location.longitude)
             }
         }
 
