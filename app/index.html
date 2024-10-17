@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebView Communication</title>
+    <script type="text/javascript">
+        function sendToAndroid() {
+            // Memanggil fungsi showToast() di Android melalui interface "AndroidInterface"
+            AndroidInterface.showToast("Hello from WebView!");
+        }
+
+        function recieveFromAndroid(message){
+            document.getElementById("headerandroid").innerText =message;
+
+        }
+    </script>
+</head>
+<body>
+    <h1 id="headerandroid" >WebView Communication</h1>
+    <button onclick="sendToAndroid()">Send Message to Android</button>
+</body>
+</html>
