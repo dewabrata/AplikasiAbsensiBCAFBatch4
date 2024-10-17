@@ -84,7 +84,7 @@ class LocationTrackingService : Service() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
     override fun onBind(intent: Intent?): IBinder? {
-        TODO("Not yet implemented")
+        return null
     }
 
 
