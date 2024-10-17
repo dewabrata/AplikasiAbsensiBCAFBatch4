@@ -224,6 +224,16 @@ class Login : AppCompatActivity() {
                     txtGPS.text = "Latitude "+location.latitude +" | Longitude " + location.longitude
                 }
 
+                override fun onProviderDisabled(provider: String) {
+                    super.onProviderDisabled(provider)
+                    Toast.makeText(this@Login,"GPS Disabled",Toast.LENGTH_LONG).show()
+                }
+
+                override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+                    super.onStatusChanged(provider, status, extras)
+                    Toast.makeText(this@Login,"Status Changed" + provider,Toast.LENGTH_LONG).show()
+                }
+
             })
             return
         }
